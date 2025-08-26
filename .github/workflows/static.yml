@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyDiata MVP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f9fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        p {
+            text-align: center;
+            color: #34495e;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+        input, select, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .output {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            min-height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MyDiata MVP</h1>
+        <p>Personalized Nutrition Recommendation (Work in Progress)</p>
+        
+        <form id="nutritionForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" placeholder="Enter your age" required>
+
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" placeholder="Enter your weight" required>
+
+            <label for="height">Height (cm):</label>
+            <input type="number" id="height" placeholder="Enter your height" required>
+
+            <label for="diet">Dietary Preference:</label>
+            <select id="diet">
+                <option value="omnivore">Omnivore</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="vegan">Vegan</option>
+            </select>
+
+            <button type="button" onclick="getRecommendation()">Get Recommendation</button>
+        </form>
+
+        <div class="output" id="output">
+            Your personalized nutrition recommendation will appear here.
+        </div>
+    </div>
+
+    <script>
+        function getRecommendation() {
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const weight = document.getElementById('weight').value;
+            const height = document.getElementById('height').value;
+            const diet = document.getElementById('diet').value;
+
+            if(!name || !age || !weight || !height) {
+                alert("Please fill in all fields!");
+                return;
+            }
+
+            // Placeholder recommendation logic
+            const bmi = (weight / ((height/100)**2)).toFixed(1);
+            let advice = "";
+
+            if (bmi < 18.5) advice = "You are underweight. Consider nutrient-dense meals with adequate protein.";
+            else if (bmi < 25) advice = "Your BMI is healthy. Maintain a balanced diet.";
+            else advice = "You are overweight. Focus on portion control and regular physical activity.";
+
+            document.getElementById('output').innerHTML = `<strong>Hello ${name}!</strong><br>
+                Your BMI is <strong>${bmi}</strong>.<br>${advice}<br>
+                Dietary preference: <strong>${diet}</strong>.`;
+        }
+    </script>
+</body>
+</html>
